@@ -14,6 +14,8 @@ pub const JSEngine = struct {
         if (runtime == null) return error.OutOfMemory;
         c.JS_SetMemoryLimit(runtime, 256 * 1024 * 1024);
         c.JS_SetMaxStackSize(runtime, 1024 * 1024);
+        c.JS_SetContextOpaque(context, @ptrCast(self));
+        c.JS_SetContextOpaque(self.context, null);
 
         const context = c.JS_NewContext(runtime);
         if (context == null) {
