@@ -11,13 +11,9 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    // QuickJS include & library paths
     lib.addIncludePath(.{ .path = "libs/quickjs" });
     lib.addLibraryPath(.{ .path = "libs/quickjs" });
     lib.linkSystemLibrary("quickjs");
-
-    // Export JNI symbols
-    lib.defineCMacro("_GNU_SOURCE", null);
 
     b.installArtifact(lib);
 }
