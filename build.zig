@@ -4,11 +4,12 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const lib = b.addSharedLibrary(.{
+    const lib = b.addExecutable(.{
         .name = "aether",
         .root_source_file = .{ .path = "src/main.zig" },
         .target = target,
         .optimize = optimize,
+        .linkage = .shared,
     });
 
     lib.addIncludePath(.{ .path = "libs/quickjs" });
